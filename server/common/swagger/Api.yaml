@@ -1,0 +1,81 @@
+swagger: "2.0"
+info:
+  version: 1.0.0
+  title: anon-api
+  description: anon api
+basePath: /api/v1
+tags:
+  - name: Examples
+    description: Simple example endpoints
+  - name: Specification
+    description: The swagger API specification
+
+consumes:
+  - application/json
+produces:
+  - application/json
+
+
+definitions:
+  BoardsBody:
+    type: object
+    title: example
+    required:
+      - name
+    properties:
+      name:
+        type: string
+        example: no_stress
+
+paths:
+  /boards:
+    get:
+      tags:
+        - Boards
+      description: Fetch all boards
+      responses:
+        200:
+          description: Returns all boards
+        
+  /boards/{abbr}:
+    get:
+      parameters:
+        - in: path
+          name: abbr
+          type: string
+          required: true
+          description: Abbreviation of board
+      tags:
+        - Board by abbr
+      description: Fetch board by abbr
+      responses:
+        200:
+          description: Returns board by abbr
+
+  /boards/{abbr}/thread/{threadNo}:
+    get:
+      parameters:
+        - in: path
+          name: abbr
+          type: string
+          required: true
+          description: Abbreviation of board
+        - in: path
+          name: threadNo
+          type: number
+          required: true
+          description: Thread number
+      tags:
+        - Thread by thread number
+      description: Fetch thread by thread number
+      responses:
+        200:
+          description: Returns thread by thread number
+
+  /spec:
+    get:
+      tags:
+        - Specification
+      responses:
+        200:
+          description: Return the API specification
